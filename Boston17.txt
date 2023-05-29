@@ -1,0 +1,45 @@
+import tensorflow as tf
+from tensorflow.keras.datasets import boston_housing
+from sklearn import preprocessing
+
+(x_train, y_train), (x_test, y_test) = boston_housing.load_data()
+
+print("x_train Shape:",x_train.shape)
+print("y_train Shape:",y_train.shape)
+print("x_test Shape:",x_test.shape)
+print("y_test Shape:",y_test.shape)
+
+x_train[0]
+
+y_train[0]
+
+x_train = preprocessing.normalize(x_train)
+x_test = preprocessing.normalize(x_test)
+
+x_train[0]
+
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import *
+
+model = Sequential();
+model.add(Dense(128,activation='relu',input_shape=(x_train[0].shape)))
+model.add(Dense(64,activation='relu'))
+model.add(Dense(32,activation='relu'))
+model.add(Dense(1))
+model.compile(optimizer='rmsprop',loss='mse',metrics=['mae'])
+
+model.fit(x_train,y_train,epochs=100,verbose=1,validation_data=(x_test,y_test))
+
+model.predict(x_test)
+
+y_test
+
+x_test[10]
+
+y_test[10]
+
+model.predict([[5.71082159e-04, 0.00000000e+00, 2.13693971e-02, 0.00000000e+00,
+       1.29814095e-03, 1.59896015e-02, 2.13194686e-01, 6.77704466e-03,
+       1.24821245e-02, 9.58627160e-01, 5.21752803e-02, 1.76746883e-01,
+       2.65369966e-02]])
+
